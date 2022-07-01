@@ -20,7 +20,7 @@ public class CSVReader {
         String line = "";
         String cvsSplitBy = ",";
 
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(csvFile),"ISO_8859_1"))) { //ahora si lo lee bien 
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(csvFile),"UTF-8"))) { //ahora si lo lee bien 
         	
         	GrafoDirigido<String> grafo = new GrafoDirigido<>(0);
         	

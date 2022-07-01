@@ -20,8 +20,8 @@ public class SecuenciaDeMayorValor {
 			
 		Iterator<String> it = this.grafo.obtenerAdyacentes(generoA);
 		
-		while(it.hasNext()) {
-			int etiqueta =
-		}
+		//while(it.hasNext()) {
+		//	int etiqueta =
+		//}
 	}
 }

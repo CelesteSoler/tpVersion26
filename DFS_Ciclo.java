@@ -29,11 +29,8 @@ import java.util.HashMap;
 			it = this.grafo.obtenerVertices();
 			
 			boolean encontre= false;
-			while(it.hasNext()&& !encontre) {
-				String verticeId = it.next();
-				if (colores.get(verticeId).equals("blanco")) 
-					encontre = dfs_visit(verticeId,generoA);
-			}
+		
+			encontre = dfs_visit(generoA,generoA);
 		
 			return encontre;	
 		}
@@ -54,6 +51,7 @@ import java.util.HashMap;
 				}
 				else if (colores.get(adyacente).equals("amarillo")&& adyacente.equals(generoA)) {//si lo visite y esta en amariillo, quiere decir que ya fue visitado, encontes lo pinto en negro
 					encontre = true;//si hay un ciclo donde lo encontre corte, lo retorno
+					System.out.println("encontre");
 				}
 			}
 			colores.put(vertice, "negro");
