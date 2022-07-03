@@ -1,5 +1,5 @@
-package Prog3_TPE2;
-//package tp2Esp;
+//package Prog3_TPE2;
+package tpVersion26;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -15,16 +15,15 @@ import java.util.Arrays;
 public class CSVReader {
 
     public static void main(String[] args) {
-     String csvFile = "C://Users//celes//OneDrive//Documents//TUDAI 2022//PROGRAMACION 3//dataset2.csv";
-//        String csvFile = "C:/Users/LangTenologia/Documents/prog3/datasetTPE2/dataset1.csv";
+//     String csvFile = "C://Users//celes//OneDrive//Documents//TUDAI 2022//PROGRAMACION 3//dataset2.csv";
+        String csvFile = "C:/Users/LangTenologia/Documents/prog3/datasetTPE2/dataset1.csv";
         String line = "";
         String cvsSplitBy = ",";
 
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(csvFile),"UTF-8"))) { //ahora si lo lee bien 
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(csvFile),"ISO_8859_1"))) { //ahora si lo lee bien 
         	
         	GrafoDirigido<String> grafo = new GrafoDirigido<>(0);
-        	
-        	 br.readLine();
+        	br.readLine();
         	 
             while ((line = br.readLine()) != null) {
 
@@ -36,7 +35,6 @@ public class CSVReader {
                 	grafo.agregarVertice(items[i+1]);
 
                 	if(grafo.existeArco(items[i], items[i+1])){
-//                		System.out.println(grafo.existeArco(items[i], items[i+1]));
                 			Arco<String> arco = grafo.obtenerArco(items[i],  items[i+1]);
                 			arco.setEtiqueta(arco.getEtiqueta()+1);
                 	} 
@@ -54,10 +52,11 @@ public class CSVReader {
             
 //            System.out.println(grafo.generoMasBuscadoA("viajes", 2)); //funciona
             
-           // System.out.println(grafo.secuenciaMayorValor("viajes"));
+//            System.out.println(grafo.secuenciaMayorValor("viajes"));
+//            System.out.println(grafo.cantidadVertices());
             DFS_Ciclo dfs = new DFS_Ciclo(grafo);
     		
-    		System.out.println(dfs.hayCiclo("informática"));
+    		dfs.ciclosDesde("informática");
             
         } catch (IOException e) {
             e.printStackTrace();

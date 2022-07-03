@@ -1,6 +1,5 @@
-package Prog3_TPE2;
-//package tp2Esp;
-
+//package Prog3_TPE2;
+package tpVersion26;
 import java.util.Iterator;
 
 public class IteradorAdyacentes<String> implements Iterator<String> {
@@ -16,13 +15,11 @@ public class IteradorAdyacentes<String> implements Iterator<String> {
 
 	@Override
 	public boolean hasNext() {
-		// TODO Auto-generated method stub
 		return it.hasNext();
 	}
 
 	@Override
 	public String next() {
-		// TODO Auto-generated method stub
 		return it.next().getVerticeDestino();
 	}
 

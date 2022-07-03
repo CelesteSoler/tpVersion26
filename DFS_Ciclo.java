@@ -1,23 +1,60 @@
-package Prog3_TPE2;
-//package tp2Esp;
-
+//package Prog3_TPE2;
+package tpVersion26;
 	import java.util.ArrayList;
 import java.util.HashMap;
-	import java.util.Iterator;
+import java.util.HashSet;
+import java.util.Iterator;
 	import java.util.List;
 
 
 	public class DFS_Ciclo {
 		private Grafo <String> grafo;
 		private HashMap<String,String>colores;
-		private ArrayList<String> verticesAfines;
+		private HashSet<String> verticesAfines;
+		private Grafo <String> grafoCopia;
 		
 		public DFS_Ciclo (Grafo <String> grafo) {
 			this.grafo = grafo;
-			this.colores = new HashMap<>();
+			this.verticesAfines = new HashSet<>();
+			this.grafoCopia =  new GrafoDirigido<>(0);
 		}
 		
-		public  ArrayList<String> hayCiclo(String generoA) {//ejercicio 3
+		//RESUELTO CON BACKTRACKING
+
+		public Grafo ciclosDesde(String generoA) {
+			HashSet <String> caminoParcial = new HashSet<String>();
+			generosAfines(generoA,generoA,caminoParcial);
+			
+			List<String> vertices = new ArrayList<String>(verticesAfines);
+
+			System.out.println(vertices);
+			for(int i=0; i< (vertices.size()-1) ; i++ ) {
+				grafoCopia.agregarVertice(vertices.get(i));
+				grafoCopia.agregarVertice(vertices.get(i+1));
+				grafoCopia.agregarArco(vertices.get(i),vertices.get(i+1), 1);
+			}
+			return this.grafoCopia;
+		}
+
+		public  void  generosAfines(String vertice, String generoA,HashSet<String> caminoParcial ){
+			Iterator<String> it = this.grafo.obtenerAdyacentes(vertice);
+			while(it.hasNext()) {
+				String adyacente = it.next();
+
+				if(adyacente.equals(generoA)) {
+					this.verticesAfines.addAll(caminoParcial);
+
+				}else if(!caminoParcial.contains(adyacente)){
+					caminoParcial.add(adyacente);
+					generosAfines(adyacente,generoA, caminoParcial);
+					caminoParcial.remove(adyacente);
+				}
+			}
+		}
+		
+		//INTENTO CON DFS
+		
+		public  ArrayList<String> hayCiclo(String generoA) {
 			
 			Iterator<String> it = this.grafo.obtenerVertices();
 			while (it.hasNext()) {
@@ -26,9 +63,6 @@ import java.util.HashMap;
 			}
 			ArrayList<String> caminoParcial = new ArrayList<String>();
 			verticesAfines  = dfs_visit(generoA,generoA,caminoParcial);
-			//generar el grafo con la lista de generos de los ciclos
-			//va a haber repetidos, controlar
-			//crear el grafo y los arcos
 			return verticesAfines;	
 		}
 		
@@ -56,51 +90,6 @@ import java.util.HashMap;
 			
 		}
 		
-		/*
-		 * public ArrayList< ArrayList<Integer> > encontrarCaminos(int origen, int destino) {
-
-		Iterator<Integer> it = this.grafo.obtenerVertices();
-		while (it.hasNext()) {
-			int verticeId = it.next();
-			this.colores.put(verticeId, "blanco");
-		}
-		ArrayList< ArrayList<Integer> >  caminos =encontrarCaminos_Visit(origen,destino) ;
-		return caminos ;	
-	}
-	
-	public ArrayList< ArrayList<Integer> > encontrarCaminos_Visit(int origen, int destino){
-		ArrayList< ArrayList<Integer> >  todosLosCaminos = new ArrayList<>();
 		
-		if (origen == destino) {
-			ArrayList<Integer> salida = new ArrayList<Integer>();
-			salida.add(origen);
-			todosLosCaminos.add(salida);
-		} 
-		else {
-			
-		this.colores.put(origen, "amarillo");
-			
-		Iterator<Integer> it = this.grafo.obtenerAdyacentes(origen);
-		
-			while (it.hasNext()){
-				int adyacente = it.next();
-				if (this.colores.get(adyacente).equals("blanco")) {
-					
-					ArrayList< ArrayList<Integer> > todosLosSubCaminos = encontrarCaminos_Visit(adyacente,destino);
-					
-					for(ArrayList<Integer> SubCamino: todosLosSubCaminos) {
-						SubCamino.add(0,origen);	
-						todosLosCaminos.add(SubCamino);
-					}
-				}	
-			}
-		}
-		return todosLosCaminos;	
-	}
-}
-*/
-		
-		
-	
 	}
 

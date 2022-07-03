@@ -1,16 +1,9 @@
-package Prog3_TPE2;
+//package Prog3_TPE2;
+package tpVersion26;
 
 import java.util.Comparator;
 
-//package tp2Esp;
-
-//anda??
-/*
- * La clase arco representa un arco del grafo. Contiene un vertice origen, un vertice destino y una etiqueta.
- * Nota: Para poder exponer los arcos fuera del grafo y que nadie los modifique se hizo esta clase inmutable
- * (Inmutable: una vez creado el arco no es posible cambiarle los valores).
- */
-public class Arco<String> implements Comparator <Arco> {
+public class Arco<String>  {
 
 	private String verticeOrigen;
 	private String verticeDestino;
@@ -43,19 +36,5 @@ public class Arco<String> implements Comparator <Arco> {
 		return "Arco [verticeOrigen=" + verticeOrigen + ", verticeDestino=" + verticeDestino + ", etiqueta=" + etiqueta
 				+ "]";
 	}
-
-	@Override
-	public int compare(Arco o1, Arco o2) {
-		return o1.getEtiqueta() - o2.getEtiqueta();
-	}
-
-//	@Override
-//	public int compareTo(Arco otroArco) {
-//		return this.getEtiqueta() - otroArco.getEtiqueta();
-//	}
-	
-	
-	
-	
 	
 }
